@@ -1,14 +1,16 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title></title>
-  {% load staticfiles %}
+
   <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen" title="no title"  charset="utf-8">
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script scr="{% static 'js/regressions/main.js' %}" type="text/javascript"></script>
+  <script type="text/javascript" src="{% static 'js/Index_Ajax.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'js/graph.js' %}" ></script>
 
   <script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
@@ -21,76 +23,13 @@
 
      var scatterInput = {{ScatterInput}};
 
-  function drawScatter(scatterInput) {
-    var scatterData = new google.visualization.DataTable();
-      scatterData.addColumn('number', 'Date');
-      scatterData.addColumn('number', 'price');
-      scatterData.addRows(scatterInput);
-
-    var scatter_options = {
-      title: 'Date vs. Price comparison',
-      // hAxis: {title: 'Date', minValue: 0, maxValue: 15},
-      // vAxis: {title: 'Price', minValue: 0, maxValue: 15},
-      legend: { position: 'bottom' }
-    };
-
-    var scatter_chart = new google.visualization.ScatterChart(document.getElementById('scatter_div'));
-
-    scatter_chart.draw(scatterData, scatter_options);
-  }
-
-  function drawCurveChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Revenue'],
-          ['2004',  1000,      400,      600],
-          ['2005',  1170,      460,      710],
-          ['2006',  660,       1400,      -740],
-          ['2007',  1030,      540,      490]
-        ]);
-
-
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-
-
-  function submitForm(form){
-    var url = form.attr("action");
-    var formData = $(form).serializeArray();
-    $.post(url, formData).done(function (data) {
-        alert(data);
-    });
-  }
 
   </script>
+<script type="text/javascript">
 
-  <script>
 
-  $(document).ready(function () {
-    $('#update_scatter_chart').click(function(event){
-      $('#message').html("<h2>Clicked on update_scatter_char</h2>")
-      $.ajax({
-                  type:"GET",
-                  url:"{% url 'regressions:newRandom' %}",
-                  data: {
-                         'element_count': $('#element_count').val() // from form
-                         },
-                  success: function(){
-                      $('#message').html("<h2>Contact Form Submitted!</h2>")
-                  }
-             });
-             return false; //<---- move it here
-        });
-  });
-  </script>
+</script>
+
 </head>
 <body>
   <a href="{% url 'regressions:ajaxPage' %}">AJAX testing page</a>
@@ -98,11 +37,15 @@
   <div id="scatter_div" style="width: 900px; height: 500px;"></div>
   <form  id= "random_count" class="" action="{% url 'regressions:newRandom' %}" method="post">
     {% csrf_token %}
-    <input id = "element_count" type="number" name="element_count" value="50">
-    <input type="submit">
+    <label for="element_count"> count</label><input id = "element_count" type="number" name="element_count" value="50">
+    <br>
+    <label for="element_variance"> Variance</label><input id = "element_variance" type="number" name="element_count" value="50">
 
+    <input id = "update_scatter_chart"  name="update_scatter_chart" value="Ajax Submit" type="button">
   </form>
-  <input id = "update_scatter_chart" type="button" name="update_scatter_chart" value="Ajax Submit">
+
+
+
   <div id = 'message'>Initial text</div>
 
   <h1>Example 2</h1>

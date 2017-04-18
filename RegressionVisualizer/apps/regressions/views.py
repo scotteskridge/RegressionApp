@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from . import makeData
-import json
+from django.http import JsonResponse
 
 
 
@@ -29,13 +29,12 @@ def newRandom(request):
     return render(request, "regressions/index.html", context)
 
 def ajaxRandom(request):
-    print("8" * 80)
-    print ("hit the new random route from AJAX jquery")
-    # ScatterInputScatterInput = makeData.randomSet(request.POST)
-    #
-    # print (ScatterInput)
-    #
-    # return ScatterInput
+
+    ScatterInput = makeData.randomSet(request.POST['element_count'], request.POST['element_variance'])
+
+    
+
+    return JsonResponse({"ScatterInput" :ScatterInput})
 
 def ajaxPage(request):
     return render(request, "regressions/ajaxTest.html")

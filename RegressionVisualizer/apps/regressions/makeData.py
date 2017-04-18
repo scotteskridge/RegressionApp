@@ -7,9 +7,9 @@ def scatterData():
 
     return ScatterData
 
-def randomSet(postData):
+def randomSet(count, variance):
     randomSet = []
-    for i in range (0 , int(postData['element_count'])):
-        randomSet.append([i, random.randint(0,10) + i])
+    for i in range (0 , int(count)):
+        randomSet.append([i, random.randint(0,int(variance)) + i])
 
     return randomSet
