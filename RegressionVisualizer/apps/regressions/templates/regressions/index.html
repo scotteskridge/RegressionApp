@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(
+      function() { // Anonymous function that calls drawChart1 and drawChart2
+           drawScatter(scatterInput);
+           drawCurveChart();
+        });
+
+
+     var scatterInput = {{ScatterInput}};
+
+  function drawScatter(scatterInput) {
+    var scatterData = new google.visualization.DataTable();
+      scatterData.addColumn('number', 'Date');
+      scatterData.addColumn('number', 'price');
+      scatterData.addRows(scatterInput);
+
+    var scatter_options = {
+      title: 'Date vs. Price comparison',
+      // hAxis: {title: 'Date', minValue: 0, maxValue: 15},
+      // vAxis: {title: 'Price', minValue: 0, maxValue: 15},
+      legend: { position: 'bottom' }
+    };
+
+    var scatter_chart = new google.visualization.ScatterChart(document.getElementById('scatter_div'));
+
+    scatter_chart.draw(scatterData, scatter_options);
+  }
+
+  function drawCurveChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses', 'Revenue'],
+          ['2004',  1000,      400,      600],
+          ['2005',  1170,      460,      710],
+          ['2006',  660,       1400,      -740],
+          ['2007',  1030,      540,      490]
+        ]);
+
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+  </script>
+
+  <script>
+    $(document).ready(function () {
+    });
+  </script>
+</head>
+<body>
+  <h1>Example 1</h1>
+  <div id="scatter_div" style="width: 900px; height: 500px;"></div>
+  <form class="" action="{% url 'regressions:newRandom' %}" method="post">
+    {% csrf_token %}
+    <input type="number" name="element_count" value="">
+    <input type="submit">
+
+  </form>
+
+  <h1>Example 2</h1>
+   <div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+
+</body>
+</html>
