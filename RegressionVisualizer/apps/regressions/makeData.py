@@ -10,6 +10,6 @@ def scatterData():
 def randomSet(count, variance):
     randomSet = []
     for i in range (0 , int(count)):
-        randomSet.append([i, random.randint(0,int(variance)) + i])
+        randomSet.append([i, random.randint(-1*int(variance),int(variance)) + i])
 
     return randomSet
