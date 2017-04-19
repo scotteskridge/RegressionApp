@@ -18,22 +18,8 @@ def index(request):
         }
     return render(request, "regressions/index.html", context)
 
-
-def newRandom(request):
-
-    ScatterInput = makeData.randomSet(request.POST)
-    print (ScatterInput)
-    context = {
-        'ScatterInput' : ScatterInput,
-        }
-    return render(request, "regressions/index.html", context)
-
 def ajaxRandom(request):
-
-    ScatterInput = makeData.randomSet(request.POST['element_count'], request.POST['element_variance'])
-
-    
-
+    ScatterInput = makeData.randomSet(request.POST['element_total_count'], request.POST['element_variance'], request.POST['element_selection_count'] )
     return JsonResponse({"ScatterInput" :ScatterInput})
 
 def ajaxPage(request):

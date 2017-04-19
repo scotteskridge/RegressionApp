@@ -13,15 +13,19 @@
   <script type="text/javascript" src="{% static 'js/graph.js' %}" ></script>
 
   <script type="text/javascript">
+  var scatterInput = {{ScatterInput}};
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(
       function() { // Anonymous function that calls drawChart1 and drawChart2
            drawScatter(scatterInput);
            drawCurveChart();
+           drawComboChart(scatterInput);
+           drawHistogram();
         });
 
 
-     var scatterInput = {{ScatterInput}};
+
+
 
 
   </script>
@@ -33,13 +37,16 @@
 </head>
 <body>
   <a href="{% url 'regressions:ajaxPage' %}">AJAX testing page</a>
-  <h1>Example 1</h1>
+  <h1>Scatter Plot</h1>
   <div id="scatter_div" style="width: 900px; height: 500px;"></div>
-  <form  id= "random_count" class="" action="{% url 'regressions:newRandom' %}" method="post">
+  <form  id= "random_count" class="" action="" method="post">
     {% csrf_token %}
-    <label for="element_count"> count</label><input id = "element_count" type="number" name="element_count" value="50">
+    <label for="element_total_count"> Total Count</label><input id = "element_total_count" type="number" name="element_total_count" value="50">
+    <br>
+    <label for="element_selection_count"> Selection Count</label><input id = "element_selection_count" type="number" name="element_selection_count" value="50">
     <br>
     <label for="element_variance"> Variance</label><input id = "element_variance" type="number" name="element_count" value="50">
+    <br>
 
     <input id = "update_scatter_chart"  name="update_scatter_chart" value="Ajax Submit" type="button">
   </form>
@@ -48,8 +55,14 @@
 
   <div id = 'message'>Initial text</div>
 
-  <h1>Example 2</h1>
-   <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  <h1>Combo Graph</h1>
+  <div id="combo_div" style="width: 900px; height: 500px;"></div>
+
+  <h1>Histogram</h1>
+  <div id="chart_div_histogram" style="width: 900px; height: 500px;"></div>
+
+  <h1>Example 3</h1>
+  <div id="curve_chart" style="width: 900px; height: 500px"></div>
 
 
 </body>
