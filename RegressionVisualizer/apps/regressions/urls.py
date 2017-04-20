@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
 
     url(r'^$', views.index, name = "index"),
+    url(r'^startPage$', views.startPage, name = "startPage"),
 
     url(r'^ajaxRandomScatterChart$', views.ajaxRandomScatterChart, name = "ajaxRandomScatterChart"),
     url(r'^ajaxRandomComboChart$', views.ajaxRandomComboChart, name = "ajaxRandomComboChart"),

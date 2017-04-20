@@ -12,13 +12,17 @@ from django.http import JsonResponse
 
 
 def index(request):
+    # LineInput = makeData.lineData()
+    # HistogramInput = makeData.lineData()
+    # context = {
+    #     'LineInput' : LineInput,
+    #     'HistogramInput' : HistogramInput,
+    #     }
+    return render(request, "regressions/index.html")
+
+def startPage(request):
     LineInput = makeData.lineData()
-    HistogramInput = makeData.lineData()
-    context = {
-        'LineInput' : LineInput,
-        'HistogramInput' : HistogramInput,
-        }
-    return render(request, "regressions/index.html", context)
+    return JsonResponse({"LineInput" : LineInput})
 
 def ajaxRandomScatterChart(request):
     ScatterInput = makeData.makeRandomSet(request.POST['scatter_total_count'], request.POST['scatter_variance'], request.POST['scatter_selection_count'] )
@@ -36,8 +40,8 @@ def ajaxPage(request):
     return render(request, "regressions/ajaxTest.html")
 
 
-class PostExample(TemplateView):
-    template_name = 'start.html'
-
-    def post(self, request):
-        return HttpResponse(json.dumps({'key': 'value'}), mimetype="application/json")
+# class PostExample(TemplateView):
+#     template_name = 'start.html'
+#
+#     def post(self, request):
+#         return HttpResponse(json.dumps({'key': 'value'}), mimetype="application/json")

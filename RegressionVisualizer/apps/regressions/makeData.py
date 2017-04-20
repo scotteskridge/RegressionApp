@@ -39,9 +39,12 @@ def makeRandomSet(total_count, variance, selection):
         #     randomSet.append(shuffledset[i])
     return randomSet
 
-def setKeytoString(list_of_lists):
-    KeysAsStrings = []
-    for pairs in list_of_lists:
-        KeysAsStrings.append([str(pairs[0]), pairs[1]])
 
-    return KeysAsStrings
+#this didnt work becuase the context object has trouble passing over string values packages up inside the lists would need to send over json instead
+
+# def setKeytoString(list_of_lists):
+#     KeysAsStrings = []
+#     for pairs in list_of_lists:
+#         KeysAsStrings.append([str(pairs[0]), pairs[1]])
+#
+#     return KeysAsStrings

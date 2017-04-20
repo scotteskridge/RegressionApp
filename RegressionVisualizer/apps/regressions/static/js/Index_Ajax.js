@@ -24,8 +24,22 @@ function submitForm(form){
 
 
 $(document).ready(function () {
-
-
+  google.charts.load('current', {'packages':['corechart']});
+  formData = {};
+  $.ajax({
+    type:"GET",
+    url:"/startPage",
+    data: formData,
+    success: function(jsonreponse){
+      google.charts.setOnLoadCallback(
+          function() { // Anonymous function that calls drawChart1 and drawChart2
+               drawScatter(jsonreponse["LineInput"]);
+               drawCurveChart();
+               drawComboChart(jsonreponse["LineInput"]);
+               drawHistogram(jsonreponse["LineInput"]);
+            });
+    }
+   });
 
 $('#update_scatter_chart').click(function(event){
   $('#message').html("<h2>Submitting a new random value </h2>");

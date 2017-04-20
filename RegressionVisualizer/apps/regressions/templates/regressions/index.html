@@ -12,29 +12,7 @@
   <script type="text/javascript" src="{% static 'js/Index_Ajax.js' %}" ></script>
   <script type="text/javascript" src="{% static 'js/graph.js' %}" ></script>
 
-  <script type="text/javascript">
-  var lineInput = {{LineInput}};
-  // ok so this is breaking when i set the list[0] to string and then try and package it up into a context object... i dont know if I can send this over as json or not but maybe i should just convert it to string in my histogram table
-  var histogramInput = {{HistogramInput}};
-  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(
-      function() { // Anonymous function that calls drawChart1 and drawChart2
-           drawScatter(lineInput);
-           drawCurveChart();
-           drawComboChart(lineInput);
-           drawHistogram(histogramInput);
-        });
 
-
-
-
-
-
-  </script>
-<script type="text/javascript">
-
-
-</script>
 
 </head>
 <body>
