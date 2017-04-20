@@ -13,14 +13,16 @@
   <script type="text/javascript" src="{% static 'js/graph.js' %}" ></script>
 
   <script type="text/javascript">
-  var scatterInput = {{ScatterInput}};
+  var lineInput = {{LineInput}};
+  // ok so this is breaking when i set the list[0] to string and then try and package it up into a context object... i dont know if I can send this over as json or not but maybe i should just convert it to string in my histogram table
+  var histogramInput = {{HistogramInput}};
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(
       function() { // Anonymous function that calls drawChart1 and drawChart2
-           drawScatter(scatterInput);
+           drawScatter(lineInput);
            drawCurveChart();
-           drawComboChart(scatterInput);
-           drawHistogram();
+           drawComboChart(lineInput);
+           drawHistogram(histogramInput);
         });
 
 
@@ -39,27 +41,46 @@
   <a href="{% url 'regressions:ajaxPage' %}">AJAX testing page</a>
   <h1>Scatter Plot</h1>
   <div id="scatter_div" style="width: 900px; height: 500px;"></div>
-  <form  id= "random_count" class="" action="" method="post">
+  <form  id= "scatter_random_count" class="" action="" method="post">
     {% csrf_token %}
-    <label for="element_total_count"> Total Count</label><input id = "element_total_count" type="number" name="element_total_count" value="50">
+    <label for="scatter_total_count"> Total Count</label><input id = "scatter_total_count" type="number" name="scatter_total_count" value="50">
     <br>
-    <label for="element_selection_count"> Selection Count</label><input id = "element_selection_count" type="number" name="element_selection_count" value="50">
+    <label for="scatter_selection_count"> Selection Count</label><input id = "scatter_selection_count" type="number" name="scatter_selection_count" value="50">
     <br>
-    <label for="element_variance"> Variance</label><input id = "element_variance" type="number" name="element_count" value="50">
+    <label for="scatter_variance"> Variance</label><input id = "scatter_variance" type="number" name="scatter_count" value="50">
     <br>
 
     <input id = "update_scatter_chart"  name="update_scatter_chart" value="Ajax Submit" type="button">
   </form>
-
-
-
-  <div id = 'message'>Initial text</div>
+  <div id = 'message'></div>
 
   <h1>Combo Graph</h1>
   <div id="combo_div" style="width: 900px; height: 500px;"></div>
+  <form  id= "combo_random_count" class="" action="" method="post">
+    {% csrf_token %}
+    <label for="combo_total_count"> Total Count</label><input id = "combo_total_count" type="number" name="combo_total_count" value="50">
+    <br>
+    <label for="combo_selection_count"> Selection Count</label><input id = "combo_selection_count" type="number" name="combo_selection_count" value="50">
+    <br>
+    <label for="combo_variance"> Variance</label><input id = "combo_variance" type="number" name="combo_count" value="50">
+    <br>
+
+    <input id = "update_combo_chart"  name="update_combo_chart" value="Ajax Submit" type="button">
+  </form>
 
   <h1>Histogram</h1>
   <div id="chart_div_histogram" style="width: 900px; height: 500px;"></div>
+  <form  id= "histogram_random_count" class="" action="" method="post">
+    {% csrf_token %}
+    <label for="histogram_total_count"> Total Count</label><input id = "histogram_total_count" type="number" name="histogram_total_count" value="50">
+    <br>
+    <label for="histogram_selection_count"> Selection Count</label><input id = "histogram_selection_count" type="number" name="histogram_selection_count" value="50">
+    <br>
+    <label for="histogram_variance"> Variance</label><input id = "histogram_variance" type="number" name="histogram_count" value="50">
+    <br>
+
+    <input id = "update_histogram_chart"  name="update_histogram_chart" value="Ajax Submit" type="button">
+  </form>
 
   <h1>Example 3</h1>
   <div id="curve_chart" style="width: 900px; height: 500px"></div>
