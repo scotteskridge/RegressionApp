@@ -1,0 +1,15 @@
+log(T[n]) = log(a[0]) + log(2)*n => linear... you can map logarithmic to linear
+
+https"/github.com/lazyprogrammer/machine_learning_examples ... linear_regression_class/moore.csv grab this file as a good data set to import and work on
+
+y = mx + b is a line
+V = RI + 0 : voltage "V" = resistance "R" * current "I"
+rise over run : delta(y) / delta(x) = R = slope = V/I
+
+All data is the same???
+list of 2d data points {(x1,y1), (x2,y2)... (xn,yn)}
+
+yHat is the prediction and it equals our line = ax + b, to minimize error measure the vertical distance between each prediction data point (yHat of x[i]) and the actual data x[i] we want all of those y[i] distances to be as small as possible.
+
+you can't simple sum all of the differences because some of the distance will be below the line and negative, so could either take the abs or the square.  **** I'm still curious what would happen if you measured to the nearest point on the prediction line rather than just measuring vertical error, need to find a way to try thid ****
+the standard solution to this problem is the sum of squared errors

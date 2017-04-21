@@ -20,6 +20,8 @@ class ChartData(object):
     #what if I make this a little easier by saying that you can't Create
     #a new data chart without at least defining the first 2 columns, so that it has both sets of lables and one full set of data
     def __init__(self, data = [], lineLable = ""):
+        self.LineLable = ["X Axis", "Data1"]
+        self.XAxisLable = []
         self.DataTable = [[None]*(2) for x in range(len(data)+1)] #I still don't understand why this works :)
         self.DataTable[0][0] = "X Axis"
         self.DataTable[0][1] = lineLable
@@ -47,6 +49,17 @@ class ChartData(object):
         for i in range(0, len(data)):
             self.DataTable[i+1][self.width] = data[i]
         return self
+
+    def packUp(self):
+        chartData = []
+        chartData.append(self.LineLable)
+        for i in range(len(XAxisLable)):
+            chartData.append(XAxisLable[i])
+        for j in range(len(DataTable)):
+            chartData[j+1].append(DataTable[j])
+
+
+        return chartData
 
 
 
