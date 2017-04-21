@@ -7,13 +7,22 @@ function setKeytoString(list_of_lists){
     return KeysAsStrings
 }
 
+function headerToString(matrix){
+
+  for (var j = 0; j < matrix[0].length; j ++){
+    matrix[0][j] = matrix[0][j].toString();
+    }
+  return matrix
+}
+
 
 
 function drawScatter(scatterInput) {
-  var scatterData = new google.visualization.DataTable();
-    scatterData.addColumn('number', 'Date');
-    scatterData.addColumn('number', 'price');
-    scatterData.addRows(scatterInput);
+    var scatterData = google.visualization.arrayToDataTable(scatterInput);
+  // var scatterData = new google.visualization.DataTable();
+  //   scatterData.addColumn('number', 'Date');
+  //   scatterData.addColumn('number', 'price');
+  //   scatterData.addRows(scatterInput);
 
   var scatter_options = {
     title: 'Date vs. Price comparison',
@@ -28,15 +37,9 @@ function drawScatter(scatterInput) {
   scatter_chart.draw(scatterData, scatter_options);
 }
 
-function drawCurveChart() {
-
-      var data = google.visualization.arrayToDataTable([
-        ['Year', 'Sales', 'Expenses', 'Revenue'],
-        ['2004',  1000,      400,      600],
-        ['2005',  1170,      460,      710],
-        ['2006',  660,       1400,      -740],
-        ['2007',  1030,      540,      490]
-      ]);
+function drawCurveChart(CurveChartInput) {
+      //every column is a line ever row is the next step in time
+      var data = google.visualization.arrayToDataTable(CurveChartInput);
 
 
       var options = {
@@ -50,22 +53,8 @@ function drawCurveChart() {
       chart.draw(data, options);
     }
 
-
-
-
-
-
-function drawComboChart(scatterInput) {
-    // Some raw data (not necessarily accurate)
-    var data = new google.visualization.DataTable();
-    // var data = google.visualization.arrayToDataTable([]);
-    data.addColumn('number', 'Date');
-    data.addColumn('number', 'price');
-    data.addRows(scatterInput);
-    data.addRows(scatterInput);
-    // data.addRows(scatterInput);
-    // data.addRows(scatterInput);
-    // data.addRows(scatterInput);
+function drawComboChart(ChartData) {
+    var data = google.visualization.arrayToDataTable(ChartData);
 
     var options = {
       title : 'Date vs Price',
@@ -91,27 +80,10 @@ function drawComboChart(scatterInput) {
   }
 
 
-  function drawHistogram(HistogramInput) {
-      var processedInput = setKeytoString(HistogramInput);
-      var data = google.visualization.arrayToDataTable(processedInput);
-
-      //   [
-      //       ["date" , "price"],
-      //       ['1'      ,     15],
-      //       ['2 '     ,     15],
-      //       ['3'      ,     12],
-      //       ['4'      ,     5],
-      //       ['5'      ,     10],
-      //       ['6'      ,     10],
-      //       ['7'      ,     10],
-      //       ['8'      ,     10],
-      //       ['9'      ,     10],
-      //       ['10 '    ,     10],
-      //       ['11'     ,     10],
-      // ]
-
-
-        // data += google.visualization.arrayToDataTable([HistogramInput]);
+  function drawHistogram(ChartData) {
+    var data = google.visualization.arrayToDataTable(ChartData);
+      // var processedInput = setKeytoString(HistogramInput);
+      // var data = google.visualization.arrayToDataTable(processedInput);
 
         var options = {
     title: 'Distribution of Data',
@@ -135,3 +107,36 @@ function drawComboChart(scatterInput) {
         var chart = new google.visualization.Histogram(document.getElementById('chart_div_histogram'));
         chart.draw(data, options);
       }
+
+
+function drawMultiLineChart() {
+  var data = google.visualization.arrayToDataTable
+
+  //so each column is a line and each row is the next value on that line
+  ([['X', '1', '2', '3', '4', '5', '6'],
+           [1, 2, 3, 4, 5, 6, 7],
+           [2, 3, 4, 5, 6, 7, 8],
+           [3, 4, 5, 6, 7, 8, 9],
+           [4, 5, 6, 7, 8, 9, 10],
+           [5, 6, 7, 8, 9, 10, 11],
+           [6, 7, 8, 9, 10, 11, 12],
+           [16, 17, 18, 19, 110, 51, 112],
+           [18, 19, 20, 21, 112, 30, 115]
+     ]);
+
+  var options = {
+    legend: 'none',
+    curveType: 'function',
+    series: {
+      // 0: { color: '#e2431e' },
+      // 1: { color: '#e7711b' },
+      // 2: { color: '#f1ca3a' },
+      // 3: { color: '#6f9654' },
+      // 4: { color: '#1c91c0' },
+      // 5: { color: '#43459d' },
+    }
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('multi_line_chart_div'));
+  chart.draw(data, options);
+}

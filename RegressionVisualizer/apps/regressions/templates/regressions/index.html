@@ -11,6 +11,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script type="text/javascript" src="{% static 'js/Index_Ajax.js' %}" ></script>
   <script type="text/javascript" src="{% static 'js/graph.js' %}" ></script>
+  <script type="text/javascript">
+   
+  </script>
 
 
 
@@ -60,8 +63,33 @@
     <input id = "update_histogram_chart"  name="update_histogram_chart" value="Ajax Submit" type="button">
   </form>
 
-  <h1>Example 3</h1>
+  <h1>Multi Curve</h1>
   <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  <form  id= "curve_random_count" class="" action="" method="post">
+    {% csrf_token %}
+    <label for="curve_total_count"> Total Count</label><input id = "curve_total_count" type="number" name="curve_total_count" value="50">
+    <br>
+    <label for="curve_selection_count"> Selection Count</label><input id = "curve_selection_count" type="number" name="curve_selection_count" value="50">
+    <br>
+    <label for="curve_variance"> Variance</label><input id = "curve_variance" type="number" name="curve_count" value="50">
+    <br>
+
+    <input id = "update_curve_chart"  name="update_curve_chart" value="Ajax Submit" type="button">
+  </form>
+
+  <h1>Multi Line</h1>
+  <div id="multi_line_chart_div" style="width: 900px; height: 500px"></div>
+  <form  id= "multi_line_random_count" class="" action="" method="post">
+    {% csrf_token %}
+    <label for="multi_line_total_count"> Total Count</label><input id = "multi_line_total_count" type="number" name="multi_line_total_count" value="50">
+    <br>
+    <label for="multi_line_selection_count"> Selection Count</label><input id = "multi_line_selection_count" type="number" name="multi_line_selection_count" value="50">
+    <br>
+    <label for="multi_line_variance"> Variance</label><input id = "multi_line_variance" type="number" name="multi_line_count" value="50">
+    <br>
+
+    <input id = "update_multi_line_chart"  name="update_multi_line_chart" value="Ajax Submit" type="button">
+  </form>
 
 
 </body>
