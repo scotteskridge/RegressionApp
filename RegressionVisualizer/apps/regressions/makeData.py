@@ -2,6 +2,9 @@ import random
 import operator
 import sys
 import unittest
+import requests #library for web request http://docs.python-requests.org/en/master/
+import pandas #data structure manipulation http://pandas.pydata.org/pandas-docs/stable/dsintro.html#dataframe
+
 
 class ChartData(object):
     #every column is a line ever row is the next step in time
@@ -107,6 +110,7 @@ def lineData(length):
     return lineData
 
 def makeRandomSet(total_count, variance, selection):
+    """this is the help string """
     #Ok so since we added in chart data objects the out put of this function can be 1 diminsional again
     randomSet = []
 
@@ -135,3 +139,12 @@ def makeRandomSet(total_count, variance, selection):
 #         KeysAsStrings.append([str(pairs[0]), pairs[1]])
 #
 #     return KeysAsStrings
+
+
+print("I'm in makedata")
+
+if __name__ == "__main__":
+    from pprint import pprint
+    pprint("now im in main")
+    r = makeRandomSet(50,10,20)
+    pprint(r)

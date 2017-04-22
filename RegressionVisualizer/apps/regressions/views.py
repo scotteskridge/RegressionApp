@@ -42,6 +42,9 @@ def startPage(request):
     return JsonResponse({"LineInput" : myChartData.DataTable, "CurveChartInput" : CurveChartInput, "myChartData" : myChartData.DataTable})
 
 def ajaxRandomScatterChart(request):
+    print(dir(request.POST))
+    print(dir(request))
+
     RandomData = makeData.makeRandomSet(request.POST['scatter_total_count'], request.POST['scatter_variance'], request.POST['scatter_selection_count'] )
     ScatterInput = makeData.ChartData(RandomData, "Look Random Data!")
     SampledInput = ScatterInput.getSample(request.POST['scatter_selection_count'])

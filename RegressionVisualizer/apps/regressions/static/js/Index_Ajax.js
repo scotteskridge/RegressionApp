@@ -1,6 +1,7 @@
 function packData(formID){
   //make a new variable to pass back
   formData = {};
+  // a= Array.from(fd.entries()) !!!! take a look at this for futre refrence. also look at .getAll
   //for each input_field in formID add dynamic key values to the formData
     //formData['my forms name'] = $('input[name ="my forms name"]').val();
   //dictionary.add({ string(formID[input_field] : formID[input_field])})
