@@ -12,4 +12,29 @@ list of 2d data points {(x1,y1), (x2,y2)... (xn,yn)}
 yHat is the prediction and it equals our line = ax + b, to minimize error measure the vertical distance between each prediction data point (yHat of x[i]) and the actual data x[i] we want all of those y[i] distances to be as small as possible.
 
 you can't simple sum all of the differences because some of the distance will be below the line and negative, so could either take the abs or the square.  **** I'm still curious what would happen if you measured to the nearest point on the prediction line rather than just measuring vertical error, need to find a way to try thid ****
-the standard solution to this problem is the sum of squared errors
+the standard solution to this problem is the sum of squared errors E = from i = 1 to i = n sum up (y[i] - yHat[i])**2 hmm i think i can code that
+
+def sumofSquaredErrors:
+  E = 0
+  for i in range(1,len(data)):
+    E += (y[i] - yHat[i])**2
+  return E
+
+in english for every data point in your list/array of data subtract your predicted value from the actual value square that result and add it to your total sum.
+
+next we want to find some line that makes E as small as possible, if we had an immaginary situation where E = 0.5t**2 - t then we could take the derivative of E with respect to t and set that to 0 to find the minimum for that function t = 1
+
+but we are not sure what our function is but in our above sumation we know that:
+
+E = sumofSquaredErrors(data, yHat)
+y[i] and x [i] are given becuase they are our data points
+yhat = (ax + b) of our prediction
+def sumofSquaredErrors(data, yHat):
+  E = 0
+  for i in range(1,len(data)):
+    E += (data[i] - yHat[i])**2
+  return E
+
+we are trying to minimize E with respect to a and b (slope and intercept of our prediction line) so we need partial derivatives
+
+first step is to take the derivative of E with respect to a (I don't actually know how to do that :P)
