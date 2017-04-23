@@ -1,4 +1,5 @@
 import random
+import numpy as np
 import operator
 import sys
 import unittest
@@ -23,8 +24,8 @@ class ChartData(object):
     #what if I make this a little easier by saying that you can't Create
     #a new data chart without at least defining the first 2 columns, so that it has both sets of lables and one full set of data
     def __init__(self, data = [], lineLable = ""):
-        self.LineLable = ["X Axis", "Data1"]
-        self.XAxisLable = []
+        self.LineLable = ["X Axis", "Data1", "Data2"]
+        self.XAxisLable = ["row1","row2","row3"]
         self.DataTable = [[None]*(2) for x in range(len(data)+1)] #I still don't understand why this works :)
         self.DataTable[0][0] = "X Axis"
         self.DataTable[0][1] = lineLable
@@ -54,15 +55,27 @@ class ChartData(object):
         return self
 
     def packUp(self):
-        chartData = []
-        chartData.append(self.LineLable)
-        for i in range(len(XAxisLable)):
-            chartData.append(XAxisLable[i])
-        for j in range(len(DataTable)):
-            chartData[j+1].append(DataTable[j])
+        displayTable = []
+        #I want this to append the x axis labels to the line lables and then append the chart data to that.
+        dt = [[1,1],[2,2],[3,3]]
+        rows = []
+        for i in range(len(self.XAxisLable)):
+            lable = [self.XAxisLable[i]]
+            newAllRows = [lable + row for row in dt]
+        displayTable.append(self.LineLable)
+        displayTable.append(newAllRows)
+        # dt += self.XAxisLable
+        print(newAllRows)
+        # for x in self.XAxisLable:
+        #     X = [x]
+        #     for y in range (len(self.LineLable)-1):
+        #         X.append(None)
+        #     displayTable.append(X)
 
 
-        return chartData
+
+
+        return displayTable
 
 
 
@@ -102,26 +115,25 @@ def shuffleSet(randset):
         randset[j] = temp
     return randset
 
-def lineData(length):
+def makeLineData(length):
     lineData = []
     for i in range (0 , length+1):
         lineData.append(i)
+
 
     return lineData
 
 def makeRandomSet(total_count, variance, selection):
     """this is the help string """
-    #Ok so since we added in chart data objects the out put of this function can be 1 diminsional again
     randomSet = []
 
     for i in range (0 , int(total_count)):
-        randomSet.append(random.randint(-1*int(variance),int(variance))+i)
-    # if (int(total_count) > int(selection)):
-    #     return random.sample(randomSet, int(selection))
-        #return sorted(random.sample(randomSet, int(selection)), key = getKey)
+        randomSet.append([i, random.randint(-1*int(variance),int(variance))+i])
+    if (int(total_count) > int(selection)):
+        return sorted(random.sample(randomSet, int(selection)), key = getKey)
         #I don't understand why this works
 
-        #So it turns out I don't need to right my own sample function savingthis code for latter
+        # So it turns out I don't need to right my own sample function savingthis code for latter
         # print("im about to shuffle")
         # shuffledset = shuffleSet(randomSet)
         # print("there are {len(shuffledset)} items in the shuffledset")
@@ -130,21 +142,20 @@ def makeRandomSet(total_count, variance, selection):
         #     randomSet.append(shuffledset[i])
     return randomSet
 
+def setKeytoString(list_of_lists):
+    KeysAsStrings = []
+    for pairs in list_of_lists:
+        KeysAsStrings.append([str(pairs[0]), pairs[1]])
 
-#this didnt work becuase the context object has trouble passing over string values packages up inside the lists would need to send over json instead
-
-# def setKeytoString(list_of_lists):
-#     KeysAsStrings = []
-#     for pairs in list_of_lists:
-#         KeysAsStrings.append([str(pairs[0]), pairs[1]])
-#
-#     return KeysAsStrings
+    return KeysAsStrings
 
 
-print("I'm in makedata")
+
 
 if __name__ == "__main__":
     from pprint import pprint
-    pprint("now im in main")
-    r = makeRandomSet(50,10,20)
-    pprint(r)
+
+    r = makeRandomSet(50,10,5)
+    # pprint(r)
+    myChart = ChartData()
+    pprint(myChart.packUp())

@@ -18,6 +18,7 @@ function headerToString(matrix){
 
 
 function drawScatter(scatterInput) {
+  // https://developers.google.com/chart/interactive/docs/php_example <--- to draw charts with json
     var scatterData = google.visualization.arrayToDataTable(scatterInput);
   // var scatterData = new google.visualization.DataTable();
   //   scatterData.addColumn('number', 'Date');

@@ -22,11 +22,15 @@ def index(request):
     return render(request, "regressions/index.html")
 
 def startPage(request):
+    # https://developers.google.com/chart/interactive/docs/php_example <--- to draw charts with json
     myNewLine = makeData.lineData(20)
+    web_stats = {   "Day"       :   [1,2,3,4,5,6],
+                    "Visitors"  :   [43,53,34,45,65,87],
+                    "Bounce_Rate" : [65,72,62,64,54,41]}
 
     myChartData = makeData.ChartData(myNewLine, "Look a Line!")
 
-    # myChartData.addColumn(myNewLine, "Look a Line!")
+    myChartData.addColumn(myNewLine, "Look a Line!")
 
     LineInput = makeData.lineData(50)
     CurveChartInput = [

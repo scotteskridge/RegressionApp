@@ -25,6 +25,7 @@ function submitForm(form){
 
 
 $(document).ready(function () {
+
   google.charts.load('current', {'packages':['corechart']});
   formData = {};
 
