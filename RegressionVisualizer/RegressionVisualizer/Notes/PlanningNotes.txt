@@ -37,4 +37,14 @@ Ok so lets think through the data structure on the one hand I should have a matr
 
 this is the form that google charts wants data to come over in which is convenient but it may not be the data that I'm actually displaying. So really what's going to happen is that I'm going to have some master data that has attributes as columns and how those attributes change of times is tracked in the rows. The I'm going to have a displayTable that will be in the exact format but will be built by adding columns from processed data (average line, projections, statistical analysis, etc.)
 
-this tells me that at some point I'm going to need to learn how to map xml or csv into a matrix. So before I get too wrapped around what steps to build my table in lets go do some tutorials on linear regression and find out wht type of out put I get and that will shape alot of the rest of this.
+this tells me that at some point I'm going to need to learn how to map xml or csv into a matrix. So before I get too wrapped around what steps to build my table in lets go do some tutorials on linear regression and find out what type of out put I get and that will shape alot of the rest of this.
+
+04/24/2017 -
+  1. send json to google charts <--- not going to happen
+  2. have json with 3 sets of data to google charts (no need for random yet just make an add line function)
+  3. get scatter and line on same chart  OK SO THE BIT OF CODE FOR THIS IS :
+      series: {
+        1: { lineWidth: 1, pointSize: 0 } //<---- THIS IS THE BIT THAT MAKES SCATTER DRAWE LINES
+      }
+
+  Findings - So I don't think I've chosen the best tool for the job but I have spent a whole day researching and I need to get back to hacking. First off the Json that google charts expects is a little wonky so I think I'm better off sending over arrays in the format that it expects.

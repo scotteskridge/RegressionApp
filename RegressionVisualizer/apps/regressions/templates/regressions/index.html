@@ -9,18 +9,62 @@
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script type="text/javascript" src="{% static 'js/Index_Ajax.js' %}" ></script>
-  <script type="text/javascript" src="{% static 'js/graph.js' %}" ></script>
-  <script type="text/javascript">
-   
-  </script>
+  <!-- <script type="text/javascript" src="{% static 'js/Index_Ajax.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'js/graph.js' %}" ></script> -->
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+      <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawMultiLineChart);
+        function drawMultiLineChart() {
+          var jsonData = $.ajax({
+          url: "/getData",
+          dataType: "json",
+          async: false
+          }).responseText;
 
+          var data = new google.visualization.DataTable(jsonData);
+
+          var options = {
+            legend: 'none',
+            curveType: 'function',
+            interpolateNulls: true,
+            hAxis: { title: 'X', minValue: 0, maxValue: 15 },
+            vAxis: { title: 'Y', minValue: 0, maxValue: 15 },
+            series: {
+               0: { lineWidth: 1, pointSize: 2},
+               1: { lineWidth: 5, pointSize: 2},
+              // 2: { color: '#f1ca3a' },
+              // 3: { color: '#6f9654' },
+              // 4: { color: '#1c91c0' },
+              // 5: { color: '#43459d' },
+            }
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('scatter_with_line_div'));
+          chart.draw(data, options);
+        }
+      </script>
 
 
 </head>
 <body>
   <a href="{% url 'regressions:ajaxPage' %}">AJAX testing page</a>
-  <h1>Scatter Plot</h1>
+  <h1>Scatter with Lines Plot</h1>
+  <div id="scatter_with_line_div" style="width: 900px; height: 500px;"></div>
+  <form  id= "scatter_with_line_div_random_count" class="" action="" method="post">
+    {% csrf_token %}
+    <label for="scatter_with_line_div_total_count"> Total Count</label><input id = "scatter_with_line_div_total_count" type="number" name="scatter_with_line_div_total_count" value="50">
+    <br>
+    <label for="scatter_with_line_div_selection_count"> Selection Count</label><input id = "scatter_with_line_div_selection_count" type="number" name="scatter_with_line_div_selection_count" value="50">
+    <br>
+    <label for="scatter_with_line_div_variance"> Variance</label><input id = "scatter_with_line_div_variance" type="number" name="scatter_with_line_div_count" value="50">
+    <br>
+
+    <input id = "update_scatter_with_line_div_chart"  name="update_scatter_with_line_div_chart" value="Ajax Submit" type="button">
+  </form>
+  <div id = 'message'></div>
+
+  <!-- <h1>Scatter Plot</h1>
   <div id="scatter_div" style="width: 900px; height: 500px;"></div>
   <form  id= "scatter_random_count" class="" action="" method="post">
     {% csrf_token %}
@@ -89,7 +133,7 @@
     <br>
 
     <input id = "update_multi_line_chart"  name="update_multi_line_chart" value="Ajax Submit" type="button">
-  </form>
+  </form> -->
 
 
 </body>

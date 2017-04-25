@@ -23,7 +23,7 @@ def index(request):
 
 def startPage(request):
     # https://developers.google.com/chart/interactive/docs/php_example <--- to draw charts with json
-    myNewLine = makeData.lineData(20)
+    myNewLine = makeData.makeLineData(20)
     web_stats = {   "Day"       :   [1,2,3,4,5,6],
                     "Visitors"  :   [43,53,34,45,65,87],
                     "Bounce_Rate" : [65,72,62,64,54,41]}
@@ -32,7 +32,7 @@ def startPage(request):
 
     myChartData.addColumn(myNewLine, "Look a Line!")
 
-    LineInput = makeData.lineData(50)
+    LineInput = makeData.makeLineData(50)
     CurveChartInput = [
             ['Year', 'Sales', 'Expenses', 'Revenue', 'lable'],
             ['2004',  1000,      400,      600,       100],
@@ -64,6 +64,30 @@ def ajaxRandomHistogramChart(request):
 
 def ajaxPage(request):
     return render(request, "regressions/ajaxTest.html")
+
+def getData(request):
+    DataTable = {{
+          cols: [{'A' : 'A-Lable'},
+                 {'B' : 'B-label'},
+                 {'C' : 'C-label'}
+                ],
+          rows: [{c:[{v: 'a'},
+                     {v: 1.0, f: 'One'},
+                     {v: new Date(2008, 1, 28, 0, 31, 26), f: '2/28/08 12:31 AM'}
+                ]},
+                 {c:[{v: 'b'},
+                     {v: 2.0, f: 'Two'},
+                     {v: new Date(2008, 2, 30, 0, 31, 26), f: '3/30/08 12:31 AM'}
+                ]},
+                 {c:[{v: 'c'},
+                     {v: 3.0, f: 'Three'},
+                     {v: new Date(2008, 3, 30, 0, 31, 26), f: '4/30/08 12:31 AM'}
+                ]}
+          ],
+          p: {foo: 'hello', bar: 'world!'}
+        }}
+
+    return JsonResponse({"DataTable" :DataTable})
 
 
 # class PostExample(TemplateView):

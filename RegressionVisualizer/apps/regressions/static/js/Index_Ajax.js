@@ -27,25 +27,26 @@ function submitForm(form){
 $(document).ready(function () {
 
   google.charts.load('current', {'packages':['corechart']});
+  google.setOnLoadCallback(scatterCombo);
   formData = {};
 
-  $.ajax({
-    type:"GET",
-    url:"/startPage",
-    data: formData,
-    success: function(jsonreponse){
-      google.charts.setOnLoadCallback(
-          function() { // Anonymous function that calls drawChart1 and drawChart2
-             drawScatter(jsonreponse["LineInput"]);
-             drawComboChart(jsonreponse["LineInput"]);
-             drawCurveChart(jsonreponse["CurveChartInput"]);
+  // $.ajax({
+  //   type:"GET",
+  //   // url:"/startPage",
+  //   data: formData,
+  //   success: function(jsonreponse){
+  //     google.charts.setOnLoadCallback(
+  //         function() { // Anonymous function that calls drawChart1 and drawChart2
+  //         scatterCombo();
+  //         drawScatter(jsonreponse["LineInput"]);
+  //         drawComboChart(jsonreponse["LineInput"]);
+  //         drawCurveChart(jsonreponse["CurveChartInput"]);
+  //         drawHistogram(jsonreponse["LineInput"]);
+  //         drawMultiLineChart();
+  //         }
+  //   });
+  // });
 
-             drawHistogram(jsonreponse["LineInput"]);
-             drawMultiLineChart();
-
-            });
-    }
-   });
 
 $('#update_scatter_chart').click(function(event){
   $('#message').html("<h2>Submitting a new random value </h2>");

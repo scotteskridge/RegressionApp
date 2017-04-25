@@ -141,3 +141,27 @@ function drawMultiLineChart() {
   var chart = new google.visualization.LineChart(document.getElementById('multi_line_chart_div'));
   chart.draw(data, options);
 }
+
+function scatterCombo() {
+  var data = google.visualization.arrayToDataTable([
+    ['X', 'Points', 'Line'],
+    [3, 3.5, 1],
+    [4, 5.5, 2],
+    [4, 5, null],
+    [6.5, 7, 3],
+    [8, 12, 4],
+    [11, 14, 5]
+  ]);
+  var options = {
+    title: 'Scatter Chart with a line',
+    hAxis: { title: 'X', minValue: 0, maxValue: 15 },
+    vAxis: { title: 'Y', minValue: 0, maxValue: 15 },
+    legend: 'none',
+    interpolateNulls: true,
+    series: {
+      1: { lineWidth: 1, pointSize: 0 } //<---- THIS IS THE BIT THAT MAKES SCATTER DRAWE LINES
+    }
+  };
+  var chart = new google.visualization.ScatterChart(document.getElementById('scatter_with_line_div'));
+  chart.draw(data, options);
+}

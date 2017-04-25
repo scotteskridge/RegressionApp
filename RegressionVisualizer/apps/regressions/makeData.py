@@ -49,9 +49,9 @@ class ChartData(object):
 
     def addColumn(self, data = [], lineLable = ""): #data is going to come over as a list and line needs to be a string
     #if the data set is empty then need to assign lables for the x axis
-        self.DataTable[0][self.width] = lineLable
+        self.DataTable[0][self.width-1] = lineLable
         for i in range(0, len(data)):
-            self.DataTable[i+1][self.width] = data[i]
+            self.DataTable[i][self.width-1] = data[i]
         return self
 
     def packUp(self):
